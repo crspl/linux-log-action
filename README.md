@@ -3,7 +3,8 @@ DESCRIPTION:
 
 SIMPLIFIED INSTALLATION FOR DEBIAN / REDHAT:
 * ```curl https://raw.githubusercontent.com/crspl/linux-log-action/master/log-action.sh -o /tmp/log-action.sh```
-* ```less /tmp/log-action.sh```
+* ```less /tmp/log-action.sh``` - check if file is ok
+* ```mv /tmp/log-action.sh /bin/```
 * ```chmod a+rx,a-w /bin/log-action.sh```
 * ```ln -s /bin/log-action.sh /etc/profile.d/log-action.sh```
 
