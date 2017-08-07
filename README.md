@@ -11,4 +11,4 @@ USAGE:
 * ```log-action.sh [-n NUM]``` - displays latest messages from log (10 by default)
 * ```log-action.sh MESSAGE``` - adds message to log
 
-# WARNING!! Do not trust files in repo for your own good, and don't rely on git clone / pull. Always better for do extra step and check file manually before copying it to /bin and creating symlink in /etc/profile.d/
+# WARNING!! Do not trust files in repo for your own good, and don't rely on git clone / pull. Always better to do extra step and check file manually before copying it to /bin and creating symlink in /etc/profile.d/
