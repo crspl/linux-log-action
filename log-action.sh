@@ -51,13 +51,17 @@ fi
 
 if [ -z "$MESSAGE" ]; then
     if [ ! -e $LOG ]; then
-        echo_yellow "No actions to display"
+        echo
+        echo_yellow "log-action - no recent messages to display"
+        echo
     else
         ACTIONS=`tail -n $NUM_LAST_ACTIONS $LOG`
         if [ -z "$ACTIONS" ]; then
-            echo_yellow "No actions to display"
+            echo
+            echo_yellow "log-action - no recent messages to display"
+            echo
         else
-            echo_yellow "Recent messages (all dates in UTC):"
+            echo_yellow "log-action  - recent messages (all dates in UTC):"
             CNT=0
             IFS=$'\n'; for ACTION in $ACTIONS; do
                 CNT=$(( (CNT + 1) % 2 ))
