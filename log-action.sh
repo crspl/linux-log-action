@@ -45,27 +45,31 @@ while true; do
     esac
 done
 
+if [ $NUM_LAST_ACTIONS -lt 1 ]; then
+    NUM_LAST_ACTIONS=10
+fi
+
 if [ -z "$MESSAGE" ]; then
     if [ ! -e $LOG ]; then
         echo_yellow "No actions to display"
-        exit
-    fi
-    ACTIONS=`tail -n $NUM_LAST_ACTIONS $LOG`
-    if [ -z "$ACTIONS" ]; then
-        echo_yellow "No actions to display"
-        exit
-    fi
-    echo_yellow "Recent messages (all dates in UTC):"
-    CNT=0
-    IFS=$'\n'; for ACTION in $ACTIONS; do
-        CNT=$(( (CNT + 1) % 2 ))
-        if [ $CNT -eq 0 ]; then
-            echo_green "    $ACTION"
+    else
+        ACTIONS=`tail -n $NUM_LAST_ACTIONS $LOG`
+        if [ -z "$ACTIONS" ]; then
+            echo_yellow "No actions to display"
         else
-            echo_lgreen "    $ACTION"
+            echo_yellow "Recent messages (all dates in UTC):"
+            CNT=0
+            IFS=$'\n'; for ACTION in $ACTIONS; do
+                CNT=$(( (CNT + 1) % 2 ))
+                if [ $CNT -eq 0 ]; then
+                    echo_green "    $ACTION"
+                else
+                    echo_lgreen "    $ACTION"
+                fi
+            done
+            echo
         fi
-    done
-    echo
+    fi
 else
     TS=`date -u '+%Y-%m-%d %H:%M:%S'`
     USER=$SUDO_USER
