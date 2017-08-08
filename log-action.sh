@@ -30,8 +30,15 @@ echo_red() {
     echo -e "${CL_RED}${@}${CL_OFF}"
 }
 
-LOG=/var/log/log-action.log
+CONFIG=/etc/logaction.conf
+LOG=/var/log/logaction.log
+
 NUM_LAST_ACTIONS=10
+
+if [ -e $CONFIG ]; then
+    source $CONFIG
+fi
+
 MESSAGE=""
 
 # PARSE ARGS
@@ -52,16 +59,17 @@ fi
 if [ -z "$MESSAGE" ]; then
     if [ ! -e $LOG ]; then
         echo
-        echo_yellow "log-action - no recent messages to display"
+        echo_yellow "logaction - no recent messages to display"
         echo
     else
         ACTIONS=`tail -n $NUM_LAST_ACTIONS $LOG`
         if [ -z "$ACTIONS" ]; then
             echo
-            echo_yellow "log-action - no recent messages to display"
+            echo_yellow "logaction - no recent messages to display"
             echo
         else
-            echo_yellow "log-action  - recent messages (all dates in UTC):"
+            echo
+            echo_yellow "logaction - recent messages (all dates in UTC):"
             CNT=0
             IFS=$'\n'; for ACTION in $ACTIONS; do
                 CNT=$(( (CNT + 1) % 2 ))
@@ -89,6 +97,6 @@ else
 
     MSG="[$TS] [$IP] [$USER]$MESSAGE"
 
-    echo "$MSG" >>/var/log/log-action.log
+    echo "$MSG" >>$LOG
     echo_yellow "Logged message: ${CL_GREEN}${MSG}${CL_OFF}"
 fi
