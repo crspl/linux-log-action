@@ -82,7 +82,7 @@ if [ -z "$MESSAGE" ]; then
             echo
         fi
     fi
-else
+elif [ -t 1 ]; then
     TS=`date -u '+%Y-%m-%d %H:%M:%S'`
     USER=$SUDO_USER
 
@@ -99,4 +99,8 @@ else
 
     echo "$MSG" >>$LOG
     echo_yellow "Logged message: ${CL_GREEN}${MSG}${CL_OFF}"
+else
+    echo
+    echo_red "You've redirected output of command. Enclose message within quotation marks." >/dev/stderr
+    echo
 fi
