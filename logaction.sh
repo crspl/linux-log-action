@@ -69,7 +69,7 @@ if [ -z "$MESSAGE" ]; then
             echo
         else
             echo
-            echo_yellow "logaction - recent messages (all dates in UTC):"
+            echo_yellow "logaction - recent messages (all dates in UTC) (current UTC time: ${CL_GREEN}`date -u '+%Y-%m-%d %H:%M:%S'`${CL_YELLOW}):"
             CNT=0
             IFS=$'\n'; for ACTION in $ACTIONS; do
                 CNT=$(( (CNT + 1) % 2 ))
@@ -82,7 +82,7 @@ if [ -z "$MESSAGE" ]; then
             echo
         fi
     fi
-elif [ -t 1 ]; then
+else
     TS=`date -u '+%Y-%m-%d %H:%M:%S'`
     USER=$SUDO_USER
 
@@ -99,8 +99,4 @@ elif [ -t 1 ]; then
 
     echo "$MSG" >>$LOG
     echo_yellow "Logged message: ${CL_GREEN}${MSG}${CL_OFF}"
-else
-    echo
-    echo_red "You've redirected output of command. Enclose message within quotation marks." >/dev/stderr
-    echo
 fi
