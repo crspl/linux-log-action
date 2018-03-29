@@ -6,10 +6,12 @@ SIMPLIFIED INSTALLATION FOR DEBIAN / REDHAT:
 * ```less /tmp/logaction.sh``` - check if file is ok
 * ```mv /tmp/logaction.sh /bin/```
 * ```chmod a+rx,a-w /bin/logaction.sh```
-* ```ln -s /bin/log-action.sh /etc/profile.d/logaction.sh```
+* ```ln -s /bin/logaction.sh /etc/profile.d/logaction.sh```
 
 USAGE:
 * ```logaction.sh [-n NUM]``` - displays latest messages from log (10 by default)
 * ```logaction.sh MESSAGE``` - adds message to log
 
 # WARNING!! Do not trust files in repo for your own good, and don't rely on git clone / pull. Always better to do extra step and check file manually before copying it to /bin and creating symlink in /etc/profile.d/
+
+# WARNING !! After installation I strongly recommend to open another SSH session before disconnecting current one and check if all works fine !!!!!
